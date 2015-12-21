@@ -14,8 +14,13 @@ The module may utilize services of well-known data providers such as Ensemble/En
 
 **[Feature Lookup API](#feature-lookup-api)**
 
+**[Tree Rendering API](#tree-render-api)**
+
 
 ##<a name="summary"></a>Summary
+The intention of Comparative Genomics Services API is a programmatic retrieval and visualization of phylogenetic trees.
+
+![Interaction Diagram](phylogeneticTreeAPI.png)
 
 ##<a name="phylogenetic-api"></a>Phylogenetic Trees API
 
@@ -283,3 +288,38 @@ Find the species and database for a gene symbol. The species name is set by defa
 | Response Formats | json   | JSON Format              |
 |                  | xml    | XML Serialization Format |
 
+
+##<a name="tree-render-api"></a>Tree Rendering API
+
+* generateTreeById
+
+Renders a phylogenetic feature tree for a given stable identifier. The species name is set by default as "arabidopsis_thaliana".
+
+### Parameters
+#### Required
+
+| Name        | Type                                 | Description                                                                  | Default  | Example Values |
+|-------------|--------------------------------------|------------------------------------------------------------------------------|----------|----------------|
+| feature_id  | String                               | An Arabidopsis stable Feature ID. The stable identifier (gene or transcript) | -        | AT3G52430      |
+| tree_type   | Enumerated String( linear, circular) | The tree format                                                              | circular | circular       |
+| tree_format | Enumerated String(newick)            | The input format of a tree                                                   | newick   | newick         |
+
+
+* generateTreeBySymbol
+
+Renders a phylogenetic feature tree by a gene symbol The species name is set by default as "arabidopsis_thaliana".
+
+### Parameters
+#### Required
+| Name        | Type                                 | Description                                      | Default  | Example Values |
+|-------------|--------------------------------------|--------------------------------------------------|----------|----------------|
+| symbol      | String                               | An Arabidopsis Symbol or display name of a gene. | -        | ABI3           |
+| tree_type   | Enumerated String( linear, circular) | The tree format                                  | circular | circular       |
+| tree_format | Enumerated String(newick)            | The input format of a tree                       | newick   | newick         |
+
+
+### Response Format
+| Methods          | search                 | Description                   |
+|------------------|------------------------|-------------------------------|
+| Response Formats | application/javascript | Application/javascript format |
+|                  | image/svg+xml          | Image/SVG format              |
